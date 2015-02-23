@@ -2,6 +2,12 @@
  * Monitor remote server uptime.
  */
 
+if (process.argv.length == 3) {
+	if(process.argv[2] == "phantom"){
+		process.env.NODE_ENV = "phantom";
+	}
+}
+
 var http       = require('http');
 var url        = require('url');
 var express    = require('express');
