@@ -5,6 +5,7 @@ var Ping = new Schema({
   timestamp    : { type: Date, default: Date.now },
   isUp         : Boolean,  // false if ping returned a non-OK status code or timed out
   isResponsive : Boolean,  // true if the ping time is less than the check max time 
+  isSmall    : Boolean,
   time         : Number,
   check        : { type: Schema.ObjectId, ref: 'Check' },
   tags         : [String],
@@ -46,9 +47,14 @@ Ping.statics.createForCheck = function(status, timestamp, time, check, monitorNa
   if (!status) {
     ping.downtime = check.interval || 60000;
     ping.error = error;
-  }
+  } 
+  ping.isSmall = false;
   if (details) {
     ping.setDetails(JSON.parse(details));
+    if(typeof details.length != 'undefined'){
+    	//Are we less than 1 byte?
+    	ping.isSmall = details.length < (check.smallSize || 1000);
+    }
   }
   ping.save(function(err1) {
     if (err1) return callback(err1);
