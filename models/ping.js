@@ -61,7 +61,7 @@ Ping.statics.createForCheck = function(status, timestamp, time, check, monitorNa
     		if(!error){
     			error = "";
     		}
-    		error += (error.length ? " " : "" ) + "response size is too small";
+    		error += (error.length ? " & " : "" ) + "Response size is too small";
     	}
     }
   }
