@@ -136,6 +136,14 @@ Check.methods.mustNotifyEvent = function(status) {
       // check goes down for the first time
       this.errorCount = 1;
     }
+    if (this.isSmall) {
+      // check goes down for the first time
+      if(this.errorCount){
+      	this.errorCount++;
+      }else{
+      	this.errorCount = 1;
+      }
+    }
     if (this.errorCount < this.alertTreshold) {
       // repeated down pings - increase error count until reaching the down alert treshold
       this.errorCount++;

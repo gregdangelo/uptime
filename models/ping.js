@@ -50,10 +50,19 @@ Ping.statics.createForCheck = function(status, timestamp, time, check, monitorNa
   } 
   ping.isSmall = false;
   if (details) {
-    ping.setDetails(JSON.parse(details));
-    if(typeof details.length != 'undefined'){
+  	var _details = JSON.parse(details);
+    ping.setDetails(_details);
+    if(typeof _details.length != 'undefined'){
+    	
     	//Are we less than 1 byte?
-    	ping.isSmall = details.length < (check.smallSize || 1000);
+    	ping.isSmall = _details.length < (check.smallSize || 1000);
+
+    	if(ping.isSmall){
+    		if(!error){
+    			error = "";
+    		}
+    		error += (error.length ? " " : "" ) + "response size is too small";
+    	}
     }
   }
   ping.save(function(err1) {
