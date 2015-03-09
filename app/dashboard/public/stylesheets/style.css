@@ -289,3 +289,7 @@ ul.nav-tabs li span {
 #check_24h + a.btn {
   margin-left: 10px;
 }
+/* "turned" off for now */
+#pollerDetails {
+	display:none;
+}
