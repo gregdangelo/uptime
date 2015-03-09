@@ -112,7 +112,20 @@
         </div>
       </div>
     </fieldset>
-
+    
+    <fieldset>
+      <div class="control-group">
+        <label class="control-label">Size threshold</label>
+        <div class="controls">
+          <div class="input-append">
+            <input type="text" name="check[smallSize]" value="<%= check.smallSize ? check.smallSize :1000 %>" class="span1" />
+            <span class="add-on">bytes</span>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    
+    
     <span id="pollerDetails">
     <%- pollerDetails %>
     </span>
