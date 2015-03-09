@@ -55,11 +55,10 @@
                 <% if (check.lastTested) { %>
                 <a class="btn" name="pause"><i class="icon-<%= check.isPaused ? 'play' : 'pause' %>"></i></a>
                 <% } %>
-                <!--<input type="text" name="check[interval]" value="<%= (check.interval / 1000).toFixed() %>" class="span2" />-->
                 <select  name="check[interval]"  class="span2">
                 	<option value="60"<% if (check.interval   == 60000) { %> selected="selected"<% } %>>1</option>
                 	<option value="120"<% if (check.interval  == 120000) { %> selected="selected"<% } %>>2</option>
-                	<option value="300"<% if (check.interval  == 300000) { %> selected="selected"<% } %>>5</option>
+                	<option value="300"<% if (!check.interval || check.interval  == 300000) { %> selected="selected"<% } %>>5</option>
                 	<option value="600"<% if (check.interval  == 600000) { %> selected="selected"<% } %>>10</option>
                 	<option value="900"<% if (check.interval  == 900000) { %> selected="selected"<% } %>>15</option>
                 	<option value="1200"<% if (check.interval == 1200000) { %> selected="selected"<% } %>>20</option>
@@ -78,7 +77,6 @@
             <label class="control-label">Slow threshold</label>
             <div class="controls">
               <div class="input-append">
-                <!--<input type="text" name="check[maxTime]" value="<%= check.maxTime %>" class="span1" />-->
                 <select name="check[maxTime]" class="span1">
 					<option value="100"<% if (check.maxTime == 100) { %> selected="selected"<% } %>>0.1</option>
 					<option value="200"<% if (check.maxTime == 200) { %> selected="selected"<% } %>>0.2</option>
