@@ -62,9 +62,6 @@
 $(document).ready(function() {
   var pingHasValidLocation = function(ping) {
   	if(!ping.details || typeof ping.details.length == 'undefined'){ return false};
-  	console.info('ping.details');
-  	console.log(ping.details);
-  	console.log(ping.details.length);
     return ping.details.length+'b';
   };
   var pingHasValidUrl = function(ping) {

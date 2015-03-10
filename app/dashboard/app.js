@@ -52,6 +52,7 @@ app.configure('production', function(){
 
 app.locals({
   version: moduleInfo.version
+  ,title:"zUptime"
 });
 
 // Routes

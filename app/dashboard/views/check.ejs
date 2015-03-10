@@ -65,6 +65,9 @@ ejs.close = '}}';
     <section id="responsiveness">
     <%- partial('_responsiveness') %>
     </section>
+    <section id="datasizes">
+    <%- partial('_dataSizes') %>
+    </section>
     <section id="data">
     <%- partial('_data', { url: '/api/checks/' + check._id + '/stats/', route: route } ) %>
     </section>
