@@ -8,7 +8,7 @@ jQuery(document).ready(function($) {
       responseTimes.push([new Date(stat.timestamp), stat.details.length || 0]);
     });
     var container = $('#dataSizesGraph').get(0);
-    Flotr.draw(container, [{ data: responseTimes, color: '#4DA74D', lines: { show: true, lineWidth: 4 }, points: { show: true } }], { 
+    Flotr.draw(container, [{ data: responseTimes, color: '#CC3366', lines: { show: true, lineWidth: 4 }, points: { show: true } }], { 
       yaxis : {
         min : 0,
         margin: false,
