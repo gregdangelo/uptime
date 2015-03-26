@@ -30,7 +30,10 @@ var Check = new Schema({
   uptime      : { type: Number, default: 0 },
   downtime    : { type: Number, default: 0 },
   qos         : {},
-  pollerParams : Schema.Types.Mixed
+  pollerParams : Schema.Types.Mixed,
+  statusHubId : Number,
+  owner: { type: Schema.ObjectId, ref: 'Account' },
+  notifiers: Object
 });
 Check.plugin(require('mongoose-lifecycle'));
 
@@ -108,7 +111,8 @@ Check.methods.setLastTest = function(status, time, error) {
       check: this,
       tags: this.tags,
       message: status ? 'up' : 'down',
-      details: error
+      details: error,
+      owner: this.owner
     });
     if (status && this.lastChanged && this.isUp != undefined) {
       // Check comes back up
@@ -357,8 +361,8 @@ Check.statics.getAllTags = function(callback) {
   });
 };
 
-Check.statics.findForTag = function(tag, callback) {
-  return this.find().where('tags').equals(tag).exec(callback);
+Check.statics.findForTag = function(owner,tag, callback) {
+  return this.find({owner: owner}).where('tags').equals(tag).exec(callback);
 };
 
 Check.statics.convertTags = function(tags) {
@@ -388,7 +392,7 @@ Check.statics.callForChecksNeedingPoll = function(callback) {
 };
 
 Check.statics.needingPoll = function() {
-  return this.$where(Check.methods.needsPoll);
+  return this.$where(Check.methods.needsPoll).populate('check.owner');
 };
 
 Check.statics.updateAllQos = function(callback) {
