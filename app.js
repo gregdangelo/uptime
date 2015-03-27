@@ -28,7 +28,9 @@ var dashboardApp = require('./app/dashboard/app');
 var mongoose   = require('./bootstrap');
 
 var a = analyzer.createAnalyzer(config.analyzer);
-a.start();
+if(config.analyzer.autostart){
+	a.start();
+}
 
 // web front
 
