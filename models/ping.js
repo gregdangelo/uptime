@@ -13,6 +13,7 @@ var Ping = new Schema({
   // for pings in error, more details need to be persisted
   downtime     : Number,   // time since last ping if the ping is down
   error        : String,
+  contentLength      : Number,
   details      : Schema.Types.Mixed
 });
 Ping.index({ timestamp: -1 });
@@ -27,6 +28,11 @@ Ping.methods.setDetails = function(details) {
   this.details = details;
   this.markModified('details');
 };
+Ping.methods.setContentLength = function(contentLength) {
+  this.contentLength = contentLength;
+  this.markModified('contentLength');
+};
+
 
 Ping.statics.createForCheck = function(status, timestamp, time, check, monitorName, error, details, callback) {
   timestamp = timestamp || new Date();
@@ -44,6 +50,7 @@ Ping.statics.createForCheck = function(status, timestamp, time, check, monitorNa
   ping.check = check;
   ping.tags = check.tags;
   ping.monitorName = monitorName;
+  ping.contentLength = 0;
   if (!status) {
     ping.downtime = check.interval || 60000;
     ping.error = error;
@@ -53,9 +60,10 @@ Ping.statics.createForCheck = function(status, timestamp, time, check, monitorNa
   	var _details = JSON.parse(details);
     ping.setDetails(_details);
     if(typeof _details.length != 'undefined'){
+    	ping.contentLength = _details.length;
     	
     	//Are we less than 1 byte?
-    	ping.isSmall = _details.length < (check.smallSize || 1000);
+    	ping.isSmall = ping.contentLength < (check.smallSize || 1000);
 
     	if(ping.isSmall){
     		if(!error){

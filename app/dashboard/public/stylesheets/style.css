@@ -290,6 +290,6 @@ ul.nav-tabs li span {
   margin-left: 10px;
 }
 /* "turned" off for now */
-#pollerDetails {
+#pollerDetails, .hidden {
 	display:none;
 }

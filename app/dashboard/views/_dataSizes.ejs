@@ -1,11 +1,15 @@
-<h2>Data Size</h2>
+<h2>Response Size</h2>
 <div id="dataSizesGraph" class="graph adjustedOnDateNavigation"></div>
 <script>
 jQuery(document).ready(function($) {
   var refreshDataSizesGraph = function() {
     var responseTimes = [];
     $.each(dateInterval.stats, function(index, stat) {
-      responseTimes.push([new Date(stat.timestamp), stat.details.length || 0]);
+    	if(stat.details){
+    	  responseTimes.push([new Date(stat.timestamp), stat.details.length || 0]);
+    	}else{
+    	  responseTimes.push([new Date(stat.timestamp), 0]);
+    	}
     });
     var container = $('#dataSizesGraph').get(0);
     Flotr.draw(container, [{ data: responseTimes, color: '#CC3366', lines: { show: true, lineWidth: 4 }, points: { show: true } }], { 

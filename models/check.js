@@ -289,6 +289,7 @@ Check.methods.getStatsForPeriod = function(period, begin, end, callback) {
         responseTime: parseInt(stat.responseTime),
         outages: stat.outages || [],
         end: stat.end ? stat.end.valueOf() : (Date.parse(stat.timestamp) + periodPrefs['duration'])
+        //,dataSize:stat.dataSize || 200
       });
     }
   }).on('close', function() {
@@ -319,6 +320,7 @@ Check.methods.getSingleStatForPeriod = function(period, date, callback) {
       outages: stat.outages || [],
       begin: begin.valueOf(),
       end: end.valueOf()
+      //,dataSize:stat.dataSize || 500
     })
   });
 };

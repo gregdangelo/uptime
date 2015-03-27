@@ -11,7 +11,7 @@ StatNavigation.prototype.init = function() {
       statPane.find('.availability').text(stat.availability.replace('.000', ''));
       statPane.find('.responsiveness').text(stat.responsiveness.replace('.000', ''));
       statPane.find('.avgRespTime').text(stat.responseTime);
-      statPane.find('.avgDataSize').text(stat.dataSize);
+      //statPane.find('.avgDataSize').text(stat.dataSize || "N/A");
 
       
       if (stat.downtime) {
